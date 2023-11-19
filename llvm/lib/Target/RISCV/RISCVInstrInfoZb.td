@@ -766,6 +766,8 @@ foreach i = {1,2,3} in {
 
 def : Pat<(i64 (add_non_imm12 (and (shl GPR:$rs1, (i64 1)), 0x1FFFFFFFF), (XLenVT GPR:$rs2))),
           (SH1ADD_UW GPR:$rs1, GPR:$rs2)>;
+def : Pat<(i64 (add_non_imm12 (shl (and GPR:$rs1 , 0xFFFFFFFF), (i64 1)), (XLenVT GPR:$rs2))),
+          (SH1ADD_UW GPR:$rs1, GPR:$rs2)>;
 def : Pat<(i64 (add_non_imm12 (and (shl GPR:$rs1, (i64 2)), 0x3FFFFFFFF), (XLenVT GPR:$rs2))),
           (SH2ADD_UW GPR:$rs1, GPR:$rs2)>;
 def : Pat<(i64 (add_non_imm12 (and (shl GPR:$rs1, (i64 3)), 0x7FFFFFFFF), (XLenVT GPR:$rs2))),
