@@ -2907,8 +2907,8 @@ static bool detectShiftUntilZeroAndOneIdiom(Loop* CurLoop, Value*& InitX,
         return false;
     }
 
-    // operand compares with 2, becouse we are looking for "x & 2"
-    // which was optimized by previous pases from "(x >> 1) & 1"
+    // operand compares with 2, because we are looking for "x & 2"
+	// which was optimized by previous passes from "(x >> 1) & 1"
 
     if(!match(DefX, m_c_And(PatternMatch::m_Value(VarX), PatternMatch::m_SpecificInt(2))))
         return false;
@@ -2950,7 +2950,7 @@ static bool detectShiftUntilZeroAndOneIdiom(Loop* CurLoop, Value*& InitX,
 
     InitX = PhiX->getIncomingValueForBlock(CurLoop->getLoopPreheader());
 
-    // Find the instruction which count the trailing zeros: cnt.next = cnt + 1.
+    // Find the instruction which counts the trailing zeros: cnt.next = cnt + 1.
     for (Instruction& Inst : llvm::make_range(
              LoopEntry->getFirstNonPHI()->getIterator(), LoopEntry->end()))
     {
@@ -3001,7 +3001,7 @@ bool LoopIdiomRecognize::recognizeAndInsertCtz()
     Value* InitX;
     PHINode* CntPhi = nullptr;
     Instruction* CntInst = nullptr;
-    // For counting trailing zeroes with uncountable loop idiom, transformation always profitable if IdiomCanonicalSize is 7.
+    // For counting trailing zeros with uncountable loop idiom, transformation is always profitable if IdiomCanonicalSize is 7.
     const size_t IdiomCanonicalSize = 7;
 
     if (!detectShiftUntilZeroAndOneIdiom(CurLoop, InitX,
