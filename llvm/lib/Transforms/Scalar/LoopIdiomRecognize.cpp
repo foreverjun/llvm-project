@@ -2979,10 +2979,10 @@ static bool detectShiftUntilZeroAndOneIdiom(Loop* CurLoop, Value*& InitX,
 /// Recognize CTTZ idiom in a non-countable loop and convert it to countable with CTTZ of variable as a trip count.
 /// If  CTTZ was inserted, returns true; otherwise, returns false.
 ///
-// int count_trailing_zeroes(int n) {
+// int count_trailing_zeroes(uint32_t n) {
 // int count = 0;
 // if (n == 0){
-//     return 0;
+//     return 32;
 // }
 // while ((n & 1) == 0) {
 //     count += 1;
